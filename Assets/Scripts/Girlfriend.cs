@@ -10,16 +10,15 @@ using static UnityEngine.Debug;
 
 public class Girlfriend : MonoBehaviour {
 
-    //todo fix highlights not working
+    //todo fix highlights not working X
     //todo clip audio X
     //todo level audio gain X
-    //todo get buttons workings
+    //todo get buttons workings X
     //todo initialization of answer X
-    //todo get audio playing in unity
-    //todo handle strike
-    //todo handle pass
-    //todo logging
-    //todo manual
+    //todo handle strike X
+    //todo handle pass X
+    //todo logging X
+    //todo manual X
     //todo twitch plays
     //todo twitch auto solves
 
@@ -93,7 +92,7 @@ public class Girlfriend : MonoBehaviour {
 
         DisplayText.text = languages[currentIndex];
 
-        LogFormat($"Language is {languages[answerIndex]}");
+        LogFormat($"[Girlfriend #{ModuleId}] Language is {languages[answerIndex]}");
 
         LeftButton.OnInteract += delegate () { LeftButtonPressed(); return false; };
         RightButton.OnInteract += delegate () { RightButtonPressed(); return false; };
@@ -122,7 +121,7 @@ public class Girlfriend : MonoBehaviour {
     private void DisplayButtonPressed()
     {
         RightButton.AddInteractionPunch(0.1f);
-        LogFormat($"Submitted {languages[currentIndex]}");
+        LogFormat($"[Girlfriend #{ModuleId}] Submitted {languages[currentIndex]}");
 
         Log($"Subbmited index {currentIndex}");
         if (currentIndex != answerIndex)
@@ -132,9 +131,12 @@ public class Girlfriend : MonoBehaviour {
 
         else
         {
+            DisplayText.text = "";
             GetComponent<KMBombModule>().HandlePass();
         }
     }
+
+
 
     private void LeftButtonPressed()
     {
@@ -172,11 +174,40 @@ public class Girlfriend : MonoBehaviour {
     }
 
 #pragma warning disable 414
-    private readonly string TwitchHelpMessage = @"Use !{0} to do something.";
+    private readonly string TwitchHelpMessage = @"Use `!{0} play` to play the song. Use `!{0} [language]` to select the language. Use `!{0} submit` to submit.";
 #pragma warning restore 414
 
    IEnumerator ProcessTwitchCommand (string Command) {
-      yield return null;
+
+        Command = Command.ToUpper();
+        yield return null;
+
+        switch (Command)
+        {
+            case "PLAY":
+                PlayButton.OnInteract();
+                break;
+
+            case "SUBMIT":
+                DisplayButton.OnInteract();
+                break;
+
+            default:
+                if (!languages.Any(w => w.ToUpper() == Command))
+                {
+                    yield return string.Format("sendtochaterror Invalid command");
+                    yield break;
+                }
+
+                else
+                {
+                    while (DisplayText.text.ToUpper() != Command)
+                    {
+                        RightButton.OnInteract();
+                    }
+                    break;
+                }
+        }
    }
 
    IEnumerator TwitchHandleForcedSolve () {
