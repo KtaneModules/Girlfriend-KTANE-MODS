@@ -6,14 +6,15 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using KModkit;
 using Rnd = UnityEngine.Random;
+using static UnityEngine.Debug;
 
 public class Girlfriend : MonoBehaviour {
 
     //todo fix highlights not working
-    //todo clip audio
-    //todo level audio gain
+    //todo clip audio X
+    //todo level audio gain X
     //todo get buttons workings
-    //todo initialization of answer
+    //todo initialization of answer X
     //todo get audio playing in unity
     //todo handle strike
     //todo handle pass
@@ -35,32 +36,134 @@ public class Girlfriend : MonoBehaviour {
     public AudioClip Portuguese;
     public AudioClip Spanish;
 
-   static int ModuleIdCounter = 1;
+
+    public KMSelectable PlayButton;
+    public KMSelectable DisplayButton;
+    public KMSelectable LeftButton;
+    public KMSelectable RightButton;
+
+    public TextMesh DisplayText;
+
+
+    private string[] languages;
+    private AudioClip[] clips;
+
+    private int answerIndex;
+    private int currentIndex;
+    private bool soundPlaying;
+
+
+    static int ModuleIdCounter = 1;
    int ModuleId;
    private bool ModuleSolved;
 
-   void Awake () {
-      ModuleId = ModuleIdCounter++;
-      /*
-      foreach (KMSelectable object in keypad) {
-          object.OnInteract += delegate () { keypadPress(object); return false; };
-      }
-      */
+    private void SetUpModule()
+    {
+        soundPlaying = false;
 
-      //button.OnInteract += delegate () { buttonPress(); return false; };
+        clips = new AudioClip[]
+        {
+            English,
+            French,
+            German,
+            Italian,
+            Japanese,
+            Mandarin,
+            Portuguese,
+            Spanish
+        };
 
+        languages = new string[]
+        {
+            "English",
+            "French",
+            "German",
+            "Italian",
+            "Japanese",
+            "Mandarin",
+            "Portuguese",
+            "Spanish"
+        };
+
+        answerIndex = Rnd.Range(0, clips.Length);
+
+        currentIndex = Rnd.Range(0, languages.Length);
+
+        DisplayText.text = languages[currentIndex];
+
+        LogFormat($"Language is {languages[answerIndex]}");
+
+        LeftButton.OnInteract += delegate () { LeftButtonPressed(); return false; };
+        RightButton.OnInteract += delegate () { RightButtonPressed(); return false; };
+
+        PlayButton.OnInteract += delegate () { PlayButtonPressed(); return false; };
+        DisplayButton.OnInteract += delegate () { DisplayButtonPressed(); return false; };
+    }
+
+    void Awake () {
+        ModuleId = ModuleIdCounter++;
+        SetUpModule();
    }
 
-   void Start () {
+    private void PlayButtonPressed()
+    {
+        RightButton.AddInteractionPunch(0.1f);
 
-   }
+        if (ModuleSolved || soundPlaying)
+            return;
 
-   void Update () {
+        soundPlaying = true;
 
-   }
+        StartCoroutine(PlaySounds());
+    }
+
+    private void DisplayButtonPressed()
+    {
+        RightButton.AddInteractionPunch(0.1f);
+        LogFormat($"Submitted {languages[currentIndex]}");
+
+        if (currentIndex != answerIndex)
+        {
+            GetComponent<KMBombModule>().HandleStrike();
+        }
+
+        else
+        { 
+            GetComponent<KMBombModule>().HandlePass();
+        }
+    }
+
+    private void LeftButtonPressed()
+    {
+        LeftButton.AddInteractionPunch(0.1f);
+
+        currentIndex--;
+
+        if (currentIndex < 0)
+        {
+            currentIndex = languages.Length - 1;
+        }
+
+        DisplayText.text = languages[currentIndex];
+    }
+
+    private void RightButtonPressed()
+    {
+        RightButton.AddInteractionPunch(0.1f);
+
+        currentIndex = (currentIndex + 1) % languages.Length;
+        DisplayText.text = languages[currentIndex];
+    }
+
+    IEnumerator PlaySounds()
+    {
+        Audio.PlaySoundAtTransform(clips[answerIndex].name, transform);
+        yield return new WaitForSeconds(clips[answerIndex].length);
+        soundPlaying = false;
+    }
 
 #pragma warning disable 414
-   private readonly string TwitchHelpMessage = @"Use !{0} to do something.";
+    private readonly string TwitchHelpMessage = @"Use !{0} to do something.";
 #pragma warning restore 414
 
    IEnumerator ProcessTwitchCommand (string Command) {
