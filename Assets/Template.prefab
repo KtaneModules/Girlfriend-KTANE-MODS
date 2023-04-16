@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 114454383462897410}
   - component: {fileID: 114853960920223876}
   - component: {fileID: 114139553842080666}
-  - component: {fileID: 114846405590615918}
+  - component: {fileID: 114279925307536716}
   m_Layer: 0
   m_Name: Template
   m_TagString: Untagged
@@ -1137,6 +1137,27 @@ MonoBehaviour:
   AllowSelectionWrapY: 0
   ForceSelectionHighlight: 0
   ForceInteractionHighlight: 0
+--- !u!114 &114279925307536716
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1676409040304040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10347b8d78b301419b15b6a1eec80e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bomb: {fileID: 114454383462897410}
+  Audio: {fileID: 114915473299363512}
+  English: {fileID: 8300000, guid: 25c4d0ae238fd964cad7c38ad9dc8425, type: 3}
+  French: {fileID: 8300000, guid: 3a6d35ca16aaf0840bbefcecd902a59d, type: 3}
+  German: {fileID: 8300000, guid: 611cea093aeb61c439cf264302a392e7, type: 3}
+  Italian: {fileID: 8300000, guid: f30966a70f9bb1a439b1f1172cc439cf, type: 3}
+  Japanese: {fileID: 8300000, guid: ec52a92ea1394834eb2602fa69368d9d, type: 3}
+  Mandarin: {fileID: 8300000, guid: 9dc7339c6ee769b41bc92fce1ffc8ecb, type: 3}
+  Portuguese: {fileID: 8300000, guid: 25bb878d16b5bdf43bd2e002c8fa190e, type: 3}
+  Spanish: {fileID: 8300000, guid: 9177aabc9303da343a3b607a541c9925, type: 3}
 --- !u!114 &114292754226745450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1288,19 +1309,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderNames:
   - GUI/KT 3D Text
---- !u!114 &114846405590615918
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1676409040304040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6121698d53055a46bc06b4583486331, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Bomb: {fileID: 114454383462897410}
-  Audio: {fileID: 114915473299363512}
 --- !u!114 &114853960920223876
 MonoBehaviour:
   m_ObjectHideFlags: 1

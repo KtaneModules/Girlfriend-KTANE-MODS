@@ -9,6 +9,20 @@ using Rnd = UnityEngine.Random;
 
 public class Girlfriend : MonoBehaviour {
 
+    //todo fix highlights not working
+    //todo clip audio
+    //todo level audio gain
+    //todo get buttons workings
+    //todo initialization of answer
+    //todo get audio playing in unity
+    //todo handle strike
+    //todo handle pass
+    //todo logging
+    //todo manual
+    //todo twitch plays
+    //todo twitch auto solves
+
+
    public KMBombInfo Bomb;
    public KMAudio Audio;
 
