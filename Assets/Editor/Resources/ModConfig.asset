@@ -14,7 +14,8 @@ MonoBehaviour:
   id: Girlfriend
   title: Girlfriend
   author: Hawker
-  description: 
+  description: "\"Hey! Hey! You! You!\"\r\n\r\nFigure out which language Avril is
+    singing in\r\n\r\nReport bugs to Hawker#0656 on discord"
   version: 1.0
   outputFolder: build
-  previewImage: {fileID: 0}
+  previewImage: {fileID: 2800000, guid: 88f458de0f068ff4c82cd3f747dfda67, type: 3}

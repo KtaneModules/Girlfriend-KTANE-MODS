@@ -19,8 +19,8 @@ public class Girlfriend : MonoBehaviour {
     //todo handle pass X
     //todo logging X
     //todo manual X
-    //todo twitch plays
-    //todo twitch auto solves
+    //todo twitch plays x
+    //todo twitch auto solves x
 
 
    public KMBombInfo Bomb;
@@ -211,6 +211,8 @@ public class Girlfriend : MonoBehaviour {
    }
 
    IEnumerator TwitchHandleForcedSolve () {
-      yield return null;
-   }
+        yield return ProcessTwitchCommand($"{languages[answerIndex]}");
+        yield return ProcessTwitchCommand("submit");
+
+    }
 }
