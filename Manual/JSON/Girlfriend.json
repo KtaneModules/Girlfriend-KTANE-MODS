@@ -1,0 +1,20 @@
+{
+    "Author": "Hawker",
+    "Compatibility": "Compatible",
+    "DefuserDifficulty": "Medium",
+    "Description": "Figure out which language Avril is singing in",
+    "ExpertDifficulty": "Medium",
+    "ModuleID": "Girlfriend",
+    "Name": "Girlfriend",
+    "Origin": "Mods",
+    "Published": "2023-04-16",
+    "RuleSeedSupport": "Supported",
+    "SortKey": "Girlfriend",
+    "SourceUrl": "https://github.com/KTANE-MODS/Girlfriend",
+    "Souvenir": {
+      "Explanation": "What was the language sang?",
+      "Status": "Considered"
+    },
+    "SteamID": "2963403039",
+    "Type": "Regular"
+  }
