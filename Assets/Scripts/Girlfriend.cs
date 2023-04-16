@@ -87,6 +87,8 @@ public class Girlfriend : MonoBehaviour {
 
         answerIndex = Rnd.Range(0, clips.Length);
 
+        Log($"Answer Index: {answerIndex}");
+
         currentIndex = Rnd.Range(0, languages.Length);
 
         DisplayText.text = languages[currentIndex];
@@ -122,13 +124,14 @@ public class Girlfriend : MonoBehaviour {
         RightButton.AddInteractionPunch(0.1f);
         LogFormat($"Submitted {languages[currentIndex]}");
 
+        Log($"Subbmited index {currentIndex}");
         if (currentIndex != answerIndex)
         {
             GetComponent<KMBombModule>().HandleStrike();
         }
 
         else
-        { 
+        {
             GetComponent<KMBombModule>().HandlePass();
         }
     }
@@ -139,10 +142,13 @@ public class Girlfriend : MonoBehaviour {
 
         currentIndex--;
 
+
         if (currentIndex < 0)
         {
             currentIndex = languages.Length - 1;
         }
+
+        Log($"Current index: {currentIndex}");
 
         DisplayText.text = languages[currentIndex];
     }
@@ -152,6 +158,9 @@ public class Girlfriend : MonoBehaviour {
         RightButton.AddInteractionPunch(0.1f);
 
         currentIndex = (currentIndex + 1) % languages.Length;
+
+        Log($"Current index: {currentIndex}");
+
         DisplayText.text = languages[currentIndex];
     }
 
