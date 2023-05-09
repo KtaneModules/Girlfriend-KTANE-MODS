@@ -108,7 +108,7 @@ public class Girlfriend : MonoBehaviour {
 
     private void PlayButtonPressed()
     {
-        RightButton.AddInteractionPunch(0.1f);
+        PlayButton.AddInteractionPunch(0.1f);
 
         if (ModuleSolved || soundPlaying)
             return;
@@ -120,7 +120,11 @@ public class Girlfriend : MonoBehaviour {
 
     private void DisplayButtonPressed()
     {
-        RightButton.AddInteractionPunch(0.1f);
+        if (ModuleSolved)
+            return;
+
+        DisplayButton.AddInteractionPunch(0.1f);
+
         LogFormat($"[Girlfriend #{ModuleId}] Submitted {languages[currentIndex]}");
 
         Log($"Subbmited index {currentIndex}");
@@ -133,6 +137,7 @@ public class Girlfriend : MonoBehaviour {
         {
             DisplayText.text = "";
             GetComponent<KMBombModule>().HandlePass();
+            ModuleSolved = true;
         }
     }
 
@@ -140,7 +145,11 @@ public class Girlfriend : MonoBehaviour {
 
     private void LeftButtonPressed()
     {
+
         LeftButton.AddInteractionPunch(0.1f);
+
+        if (ModuleSolved)
+            return;
 
         currentIndex--;
 
@@ -158,6 +167,9 @@ public class Girlfriend : MonoBehaviour {
     private void RightButtonPressed()
     {
         RightButton.AddInteractionPunch(0.1f);
+
+        if (ModuleSolved)
+            return;
 
         currentIndex = (currentIndex + 1) % languages.Length;
 
